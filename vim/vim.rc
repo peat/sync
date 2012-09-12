@@ -1,1 +1,86 @@
-/Users/peat/.vimrc
+set nocompatible "Not vi compativle (Vim is king)
+
+" Encoding and region
+set encoding=utf8
+try
+  lang en_US
+catch
+endtry
+
+""""""""""""""""""""""""""""""""""
+" Syntax and indent
+""""""""""""""""""""""""""""""""""
+syntax on " Turn on syntax highligthing
+set showmatch  "Show matching bracets when text indicator is over them
+
+" Switch on filetype detection and loads 
+" indent file (indent.vim) for specific file types
+filetype indent on
+filetype on
+
+set autoindent " Copy indent from the row above
+set si " Smart indent
+
+" slight mods from the MacVIM colorscheme
+colorscheme peat-dark
+
+
+""""""""""""""""""""""""""""""""""
+" Some other confy settings
+""""""""""""""""""""""""""""""""""
+" set nu " Number lines
+set hls " highlight search
+set lbr " linebreak
+
+" highlight current line
+hi CursorLine term=none cterm=none ctermbg=3
+set cursorline
+
+set showcmd
+set showmatch
+set ttyfast " we have a fast terminal
+
+" Use 2 space instead of tab during format
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+set scrolloff=5 " keep 5 lines before scrolling
+
+" fire up NERDTree with esc-t
+nmap <ESC>t :NERDTree<CR>
+
+" fire up FuzzyFileFinder with esc-f
+nmap <ESC>f :FufFile **/<CR>
+
+" understand that .md files are markdown
+au BufNewFile,BufRead *.md set filetype=markdown
+
+"set font
+"set guifont=Monaco:h12
+"set guifont=Menlo\ Regular:h11
+set guifont=Inconsolata:h13
+"set guifont=Anonymous\ Pro:h12
+set linespace=1
+
+" turn on line numbers
+set number
+
+" ignore extensions with FuzzyFinder
+let g:fuf_file_exclude = '\v\~$'
+      \ . '|\.(o|exe|bak|swp|class|log|jar|war|ear|swp|tar|gz|bz2|png|jpg|jpeg|gif|ico|DS_Store)$'
+      \ . '|(^|[/\\])target($|[/\\])' " sbt build directory
+      \ . '|(^|[/\\])\.(svn|hg|git|bzr)($|[/\\])' " scm dirs
+
+" hide the top toolbar
+if has("gui_running")
+  set guioptions=-t
+endif
+
+" load local .vimrc, and don't let it do anything (too) dangerous
+set exrc
+set secure
+
+" allow folding by syntax, but by default keep everything open.
+set foldmethod=syntax
+set foldlevelstart=99
